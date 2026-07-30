@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5b36d6">
+  <meta name="description" content="Actividad interactiva para investigar los bloques y categorías de Scratch.">
+  <title>Detective de Bloques</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#inicio"><span class="brand-mark">🔎</span><span><b>Detective de Bloques</b><small>Academia Scratch</small></span></a>
+    <div class="player-stats">
+      <div class="level-badge">NIVEL <strong id="levelNumber">1</strong></div>
+      <div class="xp-box"><div class="xp-label"><span>Experiencia</span><b id="xpText">0 XP</b></div><div class="xp-track"><div id="xpBar"></div></div></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-copy">
+        <span class="case-tag">EXPEDIENTE SECRETO · CASO 01</span>
+        <h1>Misión:<br><em>Desbloquea a Scratch</em></h1>
+        <p>Los bloques perdieron su identidad y quedaron dispersos por el laboratorio digital. Investiga, clasifica y recupera sus funciones antes de que el sistema se cierre.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#credencial">Iniciar misión</a>
+          <button class="btn glass" id="howBtn" type="button">Ver instrucciones</button>
+        </div>
+        <div class="hero-metrics"><span><b>5</b> misiones</span><span><b>9</b> categorías</span><span><b>100</b> XP posibles</span></div>
+      </div>
+      <div class="lab-visual" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="cat-agent">
+          <div class="cat-ears"><i></i><i></i></div><div class="cat-face"><span>•</span><span>ᴗ</span><span>•</span></div><div class="magnifier">⌕</div>
+        </div>
+        <div class="evidence e1">mover 10 pasos</div><div class="evidence e2">repetir 10</div><div class="evidence e3">al presionar ⚑</div>
+      </div>
+    </section>
+
+    <section class="dashboard shell">
+      <div class="mission-summary">
+        <div><span class="summary-icon">🗂️</span><p><small>Estado del caso</small><b id="caseStatus">Sin iniciar</b></p></div>
+        <div><span class="summary-icon">🏅</span><p><small>Insignias</small><b><span id="badgeCount">0</span> de 5</b></p></div>
+        <div><span class="summary-icon">✅</span><p><small>Progreso</small><b id="progressText">0%</b></p></div>
+      </div>
+      <div class="progress-track main-progress"><div id="progressBar"></div></div>
+    </section>
+
+    <section id="credencial" class="mission shell" data-mission="identity">
+      <div class="mission-head"><span class="mission-id">00</span><div><small>ACCESO AL LABORATORIO</small><h2>Credencial del detective</h2><p>Identifícate para abrir tu expediente.</p></div><span class="mission-chip">Pendiente</span></div>
+      <div class="identity-grid">
+        <label>Nombre y apellido<input data-save="studentName" placeholder="Escribe tu nombre"></label>
+        <label>Grupo<input data-save="studentGroup" placeholder="Ejemplo: 7.º"></label>
+        <label>Nombre clave<input data-save="codeName" placeholder="Ejemplo: Gato Pixel"></label>
+      </div>
+    </section>
+
+    <nav class="mission-map shell" aria-label="Mapa de misiones">
+      <a href="#mision1"><i>1</i><span><b>Radar cromático</b><small>Investiga las categorías</small></span></a>
+      <a href="#mision2"><i>2</i><span><b>Archivo de evidencias</b><small>Analiza bloques</small></span></a>
+      <a href="#mision3"><i>3</i><span><b>Cámara de clasificación</b><small>Resuelve el desafío</small></span></a>
+      <a href="#mision4"><i>4</i><span><b>Rastreo libre</b><small>Encuentra nuevos bloques</small></span></a>
+      <a href="#mision5"><i>5</i><span><b>Informe final</b><small>Cierra el caso</small></span></a>
+    </nav>
+
+    <section id="mision1" class="mission shell" data-mission="categories">
+      <div class="mission-head"><span class="mission-id">01</span><div><small>RECONOCIMIENTO VISUAL</small><h2>Radar cromático</h2><p>Abre Scratch, observa el panel de bloques e investiga cada categoría.</p></div><span class="mission-chip">Pendiente</span></div>
+      <div class="briefing"><span>💡</span><p><b>Pista del laboratorio:</b> busca el color real en Scratch. La tarjeta no te lo revelará: deberás elegirlo tú.</p></div>
+      <div id="categoriesGrid" class="categories-grid"></div>
+    </section>
+
+    <section id="mision2" class="mission shell" data-mission="blocks">
+      <div class="mission-head"><span class="mission-id">02</span><div><small>ANÁLISIS FORENSE</small><h2>Archivo de evidencias</h2><p>Lee cada situación, encuentra el bloque adecuado e informa qué hace.</p></div><span class="mission-chip">Pendiente</span></div>
+      <div id="caseTabs" class="case-tabs"></div>
+      <div id="caseView" class="case-view"></div>
+    </section>
+
+    <section id="mision3" class="mission shell" data-mission="quiz">
+      <div class="mission-head"><span class="mission-id">03</span><div><small>PRUEBA DE CAMPO</small><h2>Cámara de clasificación</h2><p>Clasifica los bloques. En esta prueba todos aparecen en gris para que el color no entregue la respuesta.</p></div><span class="mission-chip">Pendiente</span></div>
+      <div id="quizGrid" class="quiz-grid"></div>
+      <div class="action-row"><button class="btn primary" id="checkQuizBtn" type="button">Verificar respuestas</button><strong id="quizResult" class="quiz-result" aria-live="polite"></strong></div>
+    </section>
+
+    <section id="mision4" class="mission shell" data-mission="custom">
+      <div class="mission-head"><span class="mission-id">04</span><div><small>INVESTIGACIÓN AUTÓNOMA</small><h2>Rastreo de bloques perdidos</h2><p>Busca en Scratch tres bloques que no hayan aparecido antes.</p></div><span class="mission-chip">Pendiente</span></div>
+      <div id="customGrid" class="custom-grid"></div>
+    </section>
+
+    <section id="mision5" class="mission shell" data-mission="reflection">
+      <div class="mission-head"><span class="mission-id">05</span><div><small>CIERRE DEL EXPEDIENTE</small><h2>Informe final</h2><p>Registra tus conclusiones como detective.</p></div><span class="mission-chip">Pendiente</span></div>
+      <div class="reflection-grid">
+        <label>¿Qué categoría te pareció más útil y por qué?<textarea data-save="reflection1" rows="4" placeholder="Explica con tus palabras"></textarea></label>
+        <label>¿Qué bloque te llamó más la atención?<textarea data-save="reflection2" rows="4" placeholder="Cuenta cuál y por qué"></textarea></label>
+        <label>¿Qué videojuego o animación crearías?<textarea data-save="reflection3" rows="4" placeholder="Describe tu idea"></textarea></label>
+      </div>
+    </section>
+
+    <section class="finish shell">
+      <div class="trophy-wrap">🏆</div>
+      <div><small>MESA DE ENTREGA</small><h2>Expediente del detective</h2><p>Las respuestas se guardan en este dispositivo. Descarga el expediente para entregarlo en la plataforma.</p><div id="badges" class="badges"></div></div>
+      <div class="finish-actions"><button class="btn primary" id="downloadBtn">Descargar expediente</button><button class="btn secondary" id="printBtn">Guardar como PDF</button><button class="btn danger" id="clearBtn">Borrar progreso</button></div>
+      <p id="saveStatus" class="save-status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <dialog id="howDialog"><button id="closeDialog" class="dialog-close" aria-label="Cerrar">×</button><h2>Cómo jugar</h2><ol><li>Abre Scratch en otra pestaña o dispositivo.</li><li>Investiga cada categoría y completa las misiones.</li><li>Gana XP e insignias al completar cada sección.</li><li>Descarga tu expediente al finalizar.</li></ol><p>Puede usarse desde celular o computadora. El progreso queda guardado en el navegador.</p></dialog>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <footer>Actividad educativa · Detective de Bloques · Scratch</footer>
+  <script src="script.js"></script>
+</body>
+</html>

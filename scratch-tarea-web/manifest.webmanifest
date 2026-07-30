@@ -1,0 +1,10 @@
+{
+  "name":"Detective de Bloques",
+  "short_name":"Detective Scratch",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f5f4ff",
+  "theme_color":"#5b36d6",
+  "description":"Actividad interactiva para investigar categorías y bloques de Scratch.",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
